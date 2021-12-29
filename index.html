@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/79cd4a257f.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        section{
+            height: 100vh;
+            background: #007991;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #78ffd6, #007991);  /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to right, #78ffd6, #007991); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .main-board{
+            height: 250px;
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(240, 255, 255, 0.65);
+            border-radius: 25px;
+            
+        }
+        .butn-ply{
+            display: flex;
+            width: inherit;
+            justify-content: space-around;
+            
+            margin-top: 12px;
+        }
+        .butn-ply i{
+            font-size: 64px;
+            transition: 0.3s ease;
+        }
+        .card{
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            height: 150px;
+            width: 150px;
+        }
+        .win-stts{
+            display: inherit;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .score-card{
+            height: 200px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 25px;
+            background: rgb(10, 235, 160);
+        }
+        .usr-scr,.bot-scr{
+            height: 100px;
+            width: 100px;
+            font-size: 30px;
+            border: 1px solid black;
+            border-radius: 25px;
+            display: inherit;
+            align-items: center;
+            justify-content: center;
+            animation: identifier 2s ease-in;
+           
+          
+        }
+        .hyphen{
+            
+            font-size: 58px;
+        }
+
+        .card:hover{
+            transform: scale(1.1);
+            background-color:#007991;
+        }
+        .card:hover i{
+            transform: rotate(90deg);
+        }  
+        .result{
+            display: flex;
+            width: 350px;
+            align-items: center;
+            justify-content: space-around;
+            transform: translate(0px,30px);
+         
+        }
+        .botpoint{
+            color: rgb(233, 14, 14);
+            transform: translate(110px,-0px);
+        }
+        .userpoint{
+            color: rgb(233, 14, 14);
+
+            transform: translate(-100px,27px);
+        }
+           
+
+        
+        @keyframes identifier {
+            
+              from {
+                  font-size: 0px;
+              }
+            to {font-size: 30px;}  
+        }
+        
+       
+        
+    </style>
+</head>
+<body>
+    <section class="main">
+        <div class="main-board">
+            <div class="butn-ply">
+                <div id="rock" onclick="play('rock')" class="card"><i class="far fa-hand-rock"></i></div>
+                <div id="paper" onclick="play('paper')" class="card"><i class="far fa-hand-paper"></i></div>
+                <div id="scissors" onclick="play('scissors')" class="card"><i class="far fa-hand-scissors"></i></div>
+            </div>
+            <div class="win-stts">
+                <h3 id="res"></h3>
+            </div>
+        </div>
+        <div class="score-card">
+            <div class="result">  
+                <div class="usr-scr">
+                    <h2 id="user">0</h2>
+                </div>
+                    <h1 class="hyphen">-</h1>
+                <div class="bot-scr">
+                    <h2 id="bot">0</h2>
+                </div>
+            </div>
+            <div>
+                <h1 class="userpoint">USER</h1>
+                <h1 class="botpoint">BOT</h1>
+            </div>
+           
+            
+        </div>
+    </section>
+
+    <script>
+        var user = 0;
+        var bot = 0;
+        function play(choise){
+            var opt_arr = ['ROCK', 'PAPER', 'SCISSOR'];
+            var bot_index= Math.floor(Math.random()*3);
+            var bot_answer = opt_arr[bot_index];
+            
+            if(choise==bot_answer){
+                document.getElementById('res').innerText = "Non of You are win ";
+            }
+            else if(choise=='rock'&&bot_answer=='SCISSOR'){
+                document.getElementById('res').innerText = "USER WIN || BOT ENTERS: "+bot_answer;
+                user +=1;
+                document.getElementById('user').innerText = user;
+            }
+            else if(choise=='rock'&&bot_answer=='PAPER'){
+                document.getElementById('res').innerText = "BOT WIN || BOT ENTERS: "+bot_answer;
+                bot +=1;
+                document.getElementById('bot').innerText = bot;
+            }
+            else if(choise=='scissors'&&bot_answer=='PAPER'){
+
+                document.getElementById('res').innerText = "USER WIN || BOT ENTERS: "+bot_answer;
+                user +=1;
+                document.getElementById('user').innerText = user;
+            }
+            else if(choise=='scissors'&&bot_answer=='ROCK'){
+                document.getElementById('res').innerText = "BOT WIN || BOT ENTERS: "+bot_answer;
+                bot +=1;
+                document.getElementById('bot').innerText = bot;
+                
+            }
+            else if(choise=='paper'&&bot_answer=='SCISSOR'){
+                document.getElementById('res').innerText = "BOT WIN || BOT ENTERS: "+bot_answer;
+                bot +=1;
+                document.getElementById('bot').innerText = bot;
+            }
+            else if(choise=='paper'&&bot_answer=='ROCK'){
+                document.getElementById('res').innerText = "USER WIN || BOT ENTERS: "+bot_answer;
+                user +=1;
+                document.getElementById('user').innerText = user;
+            }
+
+        }
+    </script>
+</body>
+</html>
